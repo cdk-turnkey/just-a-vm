@@ -1,12 +1,9 @@
 {
-  "name": "madliberation",
+  "name": "just-a-vm",
   "version": "0.1.0",
-  "bin": {
-    "madliberation": "bin/madliberation.js"
-  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/cdk-turnkey/brian-liberation"
+    "url": "git://github.com/cdk-turnkey/just-a-vm"
   },
   "license": "Apache-2.0",
   "scripts": {
@@ -14,8 +11,7 @@
     "watch": "tsc -w",
     "test": "jest",
     "synth": "npx cdk synth --no-staging",
-    "diff": "npx cdk diff",
-    "init-submods": "git submodule update --init --recursive"
+    "diff": "npx cdk diff"
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.107.0",
