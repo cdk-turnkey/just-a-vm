@@ -29,10 +29,12 @@ export class Stack extends cdk.Stack {
     });
     const vm = new ec2.Instance(this, "VM", {
       instanceType: new ec2.InstanceType("t3.small"),
-      machineImage: ec2.MachineImage.latestAmazonLinux(),
+      machineImage: ec2.MachineImage.genericLinux({
+        "us-east-1": "ami-04902260ca3d33422",
+      }),
       vpc,
       vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
-      securityGroup
+      securityGroup,
     });
     securityGroup.addIngressRule(
       ec2.Peer.ipv4("18.206.107.24/29"),
