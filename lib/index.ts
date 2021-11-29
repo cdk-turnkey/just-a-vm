@@ -1,4 +1,5 @@
 import * as cdk from "@aws-cdk/core";
+import * as ec2 from "@aws-cdk/aws-ec2";
 import * as s3 from "@aws-cdk/aws-s3";
 import { RemovalPolicy } from "@aws-cdk/core";
 
@@ -17,6 +18,18 @@ export class Stack extends cdk.Stack {
       ...defaultBucketProps,
       versioned: true,
     });
+    const vpc = new ec2.Vpc(this, "VPC", {
+      subnetConfiguration: [
+        { name: "PublicSubnet", subnetType: ec2.SubnetType.PUBLIC },
+      ],
+    });
+    const vm = new ec2.Instance(this, "VM", {
+      instanceType: new ec2.InstanceType("t3.small"),
+      machineImage: ec2.MachineImage.latestAmazonLinux(),
+      vpc,
+      vpcSubnets: {subnetType: ec2.SubnetType.PUBLIC}
+    });
+    
     new cdk.CfnOutput(this, "BucketName", {
       value: bucket.bucketName,
     });
