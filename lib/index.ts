@@ -23,13 +23,21 @@ export class Stack extends cdk.Stack {
         { name: "PublicSubnet", subnetType: ec2.SubnetType.PUBLIC },
       ],
     });
+    const sg = new ec2.SecurityGroup(this, "SG", {
+      vpc,
+      allowAllOutbound: true,
+    });
     const vm = new ec2.Instance(this, "VM", {
       instanceType: new ec2.InstanceType("t3.small"),
       machineImage: ec2.MachineImage.latestAmazonLinux(),
       vpc,
-      vpcSubnets: {subnetType: ec2.SubnetType.PUBLIC}
+      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
     });
-    
+    sg.addIngressRule(
+      ec2.Peer.ipv4("18.206.107.24/29"),
+      ec2.Port.tcp(22),
+      "allow ssh access from EC2_INSTANCE_CONNECT in us-east-1"
+    );
     new cdk.CfnOutput(this, "BucketName", {
       value: bucket.bucketName,
     });
