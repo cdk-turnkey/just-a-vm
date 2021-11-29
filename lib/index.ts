@@ -23,7 +23,7 @@ export class Stack extends cdk.Stack {
         { name: "PublicSubnet", subnetType: ec2.SubnetType.PUBLIC },
       ],
     });
-    const sg = new ec2.SecurityGroup(this, "SG", {
+    const securityGroup = new ec2.SecurityGroup(this, "SG", {
       vpc,
       allowAllOutbound: true,
     });
@@ -32,8 +32,9 @@ export class Stack extends cdk.Stack {
       machineImage: ec2.MachineImage.latestAmazonLinux(),
       vpc,
       vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+      securityGroup
     });
-    sg.addIngressRule(
+    securityGroup.addIngressRule(
       ec2.Peer.ipv4("18.206.107.24/29"),
       ec2.Port.tcp(22),
       "allow ssh access from EC2_INSTANCE_CONNECT in us-east-1"
