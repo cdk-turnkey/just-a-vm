@@ -27,17 +27,19 @@ export class Stack extends cdk.Stack {
       vpc,
       allowAllOutbound: true,
     });
+    const AMI_WITH_INSTANCE_CONNECT_INSTALLED = "ami-04902260ca3d33422";
     const vm = new ec2.Instance(this, "VM", {
       instanceType: new ec2.InstanceType("t3.small"),
       machineImage: ec2.MachineImage.genericLinux({
-        "us-east-1": "ami-04902260ca3d33422",
+        "us-east-1": AMI_WITH_INSTANCE_CONNECT_INSTALLED,
       }),
       vpc,
       vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
       securityGroup,
     });
+    const EC2_INSTANCE_CONNECT_IP_RANGE_US_EAST_1 = "18.206.107.24/29";
     securityGroup.addIngressRule(
-      ec2.Peer.ipv4("18.206.107.24/29"),
+      ec2.Peer.ipv4(EC2_INSTANCE_CONNECT_IP_RANGE_US_EAST_1),
       ec2.Port.tcp(22),
       "allow ssh access from EC2_INSTANCE_CONNECT in us-east-1"
     );
