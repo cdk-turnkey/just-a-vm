@@ -30,6 +30,7 @@
     "@aws-cdk/aws-cloudfront-origins": "1.134.0",
     "@aws-cdk/aws-cognito": "1.134.0",
     "@aws-cdk/aws-dynamodb": "1.134.0",
+    "@aws-cdk/aws-ec2": "^1.134.0",
     "@aws-cdk/aws-iam": "1.134.0",
     "@aws-cdk/aws-lambda": "1.134.0",
     "@aws-cdk/aws-route53": "1.134.0",
@@ -37,7 +38,7 @@
     "@aws-cdk/aws-ssm": "1.134.0",
     "@aws-cdk/core": "1.134.0",
     "@cdk-turnkey/stackname": "^1.2.0",
-    "aws-sdk": "^2.850.0",
+    "aws-sdk": "^2.1037.0",
     "bufferutil": "^4.0.3",
     "utf-8-validate": "^5.0.5"
   }
